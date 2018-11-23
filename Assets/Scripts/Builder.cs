@@ -15,14 +15,12 @@ public class Builder
     {
         string target_dir = APP_NAME + ".apk";
 
-        string folder = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString("D2") + DateTime.Now.Day.ToString("D2");
-
-        if (Directory.Exists(TARGET_DIR + "/" + folder) == false)
+        if (Directory.Exists(TARGET_DIR) == false)
         {
-            Directory.CreateDirectory(TARGET_DIR + "/" + folder);
+            Directory.CreateDirectory(TARGET_DIR);
         }
 
-        GenericBuild(SCENES, TARGET_DIR + "/" + folder + "/" + target_dir, BuildTargetGroup.Android, BuildTarget.Android, BuildOptions.None);
+        GenericBuild(SCENES, TARGET_DIR + "/" + target_dir, BuildTargetGroup.Android, BuildTarget.Android, BuildOptions.None);
     }
 
     private static string[] FindEnabledEditorScenes()
