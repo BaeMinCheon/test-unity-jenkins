@@ -33,9 +33,9 @@ class BMCBuilder
     {
         EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, build_target);
         string res = BuildPipeline.BuildPlayer(scenes, target_dir, build_target, build_options).ToString();
-        if (res.Length > 0)
-        {
-            throw new Exception("BuildPlayer failure : " + res);
-        }
+        //if (res.Length > 0)
+        //{
+        //    throw new Exception("BuildPlayer failure : " + res);
+        //}
     }
 }
