@@ -61,7 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Builder.cs" />
+    <Compile Include="Assets\Builder.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>D:/Git/test-unity-jenkins/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
