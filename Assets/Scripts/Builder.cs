@@ -5,22 +5,18 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Builder
+class Builder
 {
     static string[] SCENES = FindEnabledEditorScenes();
-    static string APP_NAME = "test";
-    static string TARGET_DIR = "Build";
 
-    public static void Build()
+    static string APP_NAME = "YourProject";
+    static string TARGET_DIR = "target";
+
+    [MenuItem("Android")]
+    static void PerformMacOSXBuild()
     {
         string target_dir = APP_NAME + ".apk";
-
-        if (Directory.Exists(TARGET_DIR) == false)
-        {
-            Directory.CreateDirectory(TARGET_DIR);
-        }
-
-        GenericBuild(SCENES, TARGET_DIR + "/" + target_dir, BuildTargetGroup.Android, BuildTarget.Android, BuildOptions.None);
+        Build(SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.Android, BuildOptions.None);
     }
 
     private static string[] FindEnabledEditorScenes()
@@ -28,34 +24,19 @@ public class Builder
         List<string> EditorScenes = new List<string>();
         foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
         {
-            if (!scene.enabled)
-                continue;
+            if (!scene.enabled) continue;
             EditorScenes.Add(scene.path);
         }
         return EditorScenes.ToArray();
     }
 
-    public static void GenericBuild(string[] scenes, string target_dir, BuildTargetGroup build_group, BuildTarget build_target, BuildOptions build_options)
+    static void Build(string[] scenes, string target_dir, BuildTarget build_target, BuildOptions build_options)
     {
-        EditorUserBuildSettings.SwitchActiveBuildTarget(build_group, build_target);
+        EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, build_target);
         string res = BuildPipeline.BuildPlayer(scenes, target_dir, build_target, build_options).ToString();
         if (res.Length > 0)
         {
-            Debug.Log("BuildPlayer failure : " + res);
             throw new Exception("BuildPlayer failure : " + res);
         }
-    }
-
-    private static string GetArg(string name)
-    {
-        string[] arguments = System.Environment.GetCommandLineArgs();
-        for (int nIndex = 0; nIndex < arguments.Length; ++nIndex)
-        {
-            if (arguments[nIndex] == name && arguments.Length > nIndex + 1)
-            {
-                return arguments[nIndex + 1];
-            }
-        }
-        return null;
     }
 }
