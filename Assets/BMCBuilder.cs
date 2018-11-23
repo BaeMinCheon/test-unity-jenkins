@@ -7,6 +7,8 @@ using System.Collections.Generic;
 
 class BMCBuilder
 {
+#if UNITY_EDITOR
+
     static string[] SCENES = FindEnabledEditorScenes();
 
     static string APP_NAME = "YourProject";
@@ -44,4 +46,6 @@ class BMCBuilder
             throw new Exception("BuildPlayer failure : " + res);
         }
     }
+
+#endif
 }
