@@ -5,7 +5,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 
-class Builder
+public class Builder
 {
     static string[] SCENES = FindEnabledEditorScenes();
     static string APP_NAME = "test";
