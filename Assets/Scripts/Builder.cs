@@ -11,14 +11,9 @@ public class Builder
     static string APP_NAME = "test";
     static string TARGET_DIR = "Build";
 
-    static void Build()
+    public static void Build()
     {
-        string prefix = GetArg("-outputprefix");
-        string dateTime = DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
-        string target_dir = prefix + "_" + APP_NAME + "_" + dateTime + ".apk";
-
-        PlayerSettings.keystorePass = "키스토어비번";
-        PlayerSettings.keyaliasPass = "키별칭비번";
+        string target_dir = APP_NAME + ".apk";
 
         string folder = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString("D2") + DateTime.Now.Day.ToString("D2");
 
@@ -42,7 +37,7 @@ public class Builder
         return EditorScenes.ToArray();
     }
 
-    static void GenericBuild(string[] scenes, string target_dir, BuildTargetGroup build_group, BuildTarget build_target, BuildOptions build_options)
+    public static void GenericBuild(string[] scenes, string target_dir, BuildTargetGroup build_group, BuildTarget build_target, BuildOptions build_options)
     {
         EditorUserBuildSettings.SwitchActiveBuildTarget(build_group, build_target);
         string res = BuildPipeline.BuildPlayer(scenes, target_dir, build_target, build_options).ToString();
